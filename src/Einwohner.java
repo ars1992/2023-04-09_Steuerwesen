@@ -1,14 +1,14 @@
 public abstract class Einwohner {
-    private String name;
-    private int einkommen;
+    private final String NAME;
+    private final int EINKOMMEN;
 
     public Einwohner(String name, int einkommen) {
-        this.name = name;
-        this.einkommen = einkommen;
+        this.NAME = name;
+        this.EINKOMMEN = einkommen;
     }
 
     public int zuVersteuern(){
-        return this.einkommen;
+        return this.EINKOMMEN;
     }
 
     public int steuer(){
