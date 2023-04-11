@@ -1,6 +1,8 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Königreich {
+    public static Scanner eingabe = new Scanner(System.in);
 
     /**
      * Bei änderungen von Bevölkerungsgruppen muss dieses Array abgändert werden
@@ -17,10 +19,7 @@ public class Königreich {
             System.out.println("Geben Sie den Namen an: ");
             String name = eingabe.next();
 
-            System.out.println("Geben Sie das Einkommen an: ");
-            int einkommen = eingabe.nextInt();
-
-            ausgabeSteuern(bevölgerungsgruppe, name, einkommen);
+            ausgabeSteuern(bevölgerungsgruppe, name, abfrageEinkommen());
 
         }while ( ! beenden().equalsIgnoreCase("j"));
     }
@@ -30,22 +29,11 @@ public class Königreich {
      * @return Art der Bevölkerungsgruppe
      */
     public static int bevölgerungsgruppe(){
-        Scanner eingabe = new Scanner(System.in);
         System.out.println("Wählen Sie eine Bevölkerungsgruppe");
         for (int i = 0; i < bevölkerungsgruppen.length; i++) {
             System.out.println((i + 1) + " - " + bevölkerungsgruppen[i]);
         }
         return eingabe.nextInt();
-    }
-
-    /**
-     * Dient zur Abfrage des Users ob das Programm beendet werden soll
-     * @return eingabe des Users
-     */
-    public static String beenden(){
-        Scanner eingabe = new Scanner(System.in);
-        System.out.println("Möchten Sie das Programm beenden? (j/n)");
-        return eingabe.next();
     }
 
     /**
@@ -66,6 +54,27 @@ public class Königreich {
     }
 
     /**
+     * Überprüft ob eingabe des Users eine gültige Zahl ist
+     * @return einkommen
+     */
+    public static int abfrageEinkommen(){
+        System.out.println("Geben Sie das Einkommen an: ");
+        boolean eingabeNichtOk = true;
+        int einkommen = 0;
+        do {
+            try {
+                einkommen = eingabe.nextInt();
+                eingabeNichtOk = false;
+            } catch (InputMismatchException e) {
+                eingabe.next();
+                System.out.println("Fehlerhafte Eingabe");
+                System.out.println("Geben Sie erneut das Einkommen an: ");
+            }
+        }while (eingabeNichtOk);
+        return einkommen;
+    }
+
+    /**
      * Gibt die gewünschten Steuern aus
      * Welche der User abfrägt.
      * @param bevölgerungsgruppe
@@ -73,6 +82,7 @@ public class Königreich {
      * @param einkommen
      */
     public static void ausgabeSteuern(int bevölgerungsgruppe, String name, int einkommen){
+        System.out.print("Die Steuern betragen: ");
         Einwohner[] gruppen = new Einwohner[]{
                 new König(name, einkommen),
                 new Adel(name, einkommen),
@@ -81,8 +91,17 @@ public class Königreich {
         };
         for (int i = 0; i < bevölkerungsgruppen.length; i++) {
             if((i + 1) == bevölgerungsgruppe){
-                System.out.println(gruppen[i].steuer());
+                System.out.println(gruppen[i].steuer() + " Taller");
             }
         }
+    }
+
+    /**
+     * Dient zur Abfrage des Users ob das Programm beendet werden soll
+     * @return eingabe des Users
+     */
+    public static String beenden(){
+        System.out.println("Möchten Sie das Programm beenden? (j/n)");
+        return eingabe.next();
     }
 }
