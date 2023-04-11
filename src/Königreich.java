@@ -13,13 +13,13 @@ public class Königreich {
     public static void main(String[] args) {
         Scanner eingabe = new Scanner(System.in);
         do{
-            int bevölgerungsgruppe = bevölgerungsgruppe();
-            if ( ! eingabeGültig(bevölgerungsgruppe)) continue;
+            int bevölkerungsgruppe = bevölkerungsgruppe();
+            if ( ! eingabeGültig(bevölkerungsgruppe)) continue;
 
             System.out.println("Geben Sie den Namen an: ");
             String name = eingabe.next();
 
-            ausgabeSteuern(bevölgerungsgruppe, name, abfrageEinkommen());
+            ausgabeSteuern(bevölkerungsgruppe, name, abfrageEinkommen());
 
         }while ( ! beenden().equalsIgnoreCase("j"));
     }
@@ -28,7 +28,7 @@ public class Königreich {
      * Dient zur bestimmung der Bevölgerungsgruppe durch den User
      * @return Art der Bevölkerungsgruppe
      */
-    public static int bevölgerungsgruppe(){
+    public static int bevölkerungsgruppe(){
         System.out.println("Wählen Sie eine Bevölkerungsgruppe");
         for (int i = 0; i < bevölkerungsgruppen.length; i++) {
             System.out.println((i + 1) + " - " + bevölkerungsgruppen[i]);
@@ -38,12 +38,12 @@ public class Königreich {
 
     /**
      * Prüft ob Eingabe des Users valide ist
-     * @param bevölgerungsgruppe
+     * @param bevölkerungsgruppe
      * @return true bei valider eingabe
      */
-    public static boolean eingabeGültig(int bevölgerungsgruppe){
+    public static boolean eingabeGültig(int bevölkerungsgruppe){
         int anzahlBevölkerungsGruppen = bevölkerungsgruppen.length;
-        if (bevölgerungsgruppe < 0 || bevölgerungsgruppe > anzahlBevölkerungsGruppen){
+        if (bevölkerungsgruppe < 0 || bevölkerungsgruppe > anzahlBevölkerungsGruppen){
             System.out.println("""
                             Abfrage nicht möglich.
                             Ungültige Eingabe.
