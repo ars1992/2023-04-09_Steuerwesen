@@ -77,12 +77,11 @@ public class Königreich {
     /**
      * Gibt die gewünschten Steuern aus
      * Welche der User abfrägt.
-     * @param bevölgerungsgruppe
+     * @param bevölkerungsgruppe
      * @param name
      * @param einkommen
      */
-    public static void ausgabeSteuern(int bevölgerungsgruppe, String name, int einkommen){
-        System.out.print("Die Steuern betragen: ");
+    public static void ausgabeSteuern(int bevölkerungsgruppe, String name, int einkommen){
         Einwohner[] gruppen = new Einwohner[]{
                 new König(name, einkommen),
                 new Adel(name, einkommen),
@@ -90,8 +89,11 @@ public class Königreich {
                 new Leibeigen(name, einkommen)
         };
         for (int i = 0; i < bevölkerungsgruppen.length; i++) {
-            if((i + 1) == bevölgerungsgruppe){
-                System.out.println(gruppen[i].steuer() + " Taller");
+            if((i + 1) == bevölkerungsgruppe){
+                System.out.println("Bevölkerungsgruppe: " + bevölkerungsgruppen[i]);
+                System.out.println("Name: " + name);
+                System.out.println("Einkommen: " + einkommen);
+                System.out.println("Die Steuern betragen: " + gruppen[i].steuer() + " Taller");
             }
         }
     }
