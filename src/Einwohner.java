@@ -7,13 +7,21 @@ public abstract class Einwohner {
         this.EINKOMMEN = einkommen;
     }
 
-    public int zuVersteuern(){
-        return this.EINKOMMEN;
+    /**
+     * Gibt das Einkommen zurück
+     * @return EINKOMMEN
+     */
+     public int zuVersteuern(){
+         return this.EINKOMMEN;
     }
 
+    /**
+     * Gibt die zu zahlenden Steuern zurück
+     * @return berechneteSteuer
+     */
     public int steuer(){
-       int steuer = (int) (this.zuVersteuern() * 0.10);
-       if (steuer < 1) return 1;
-       return steuer;
+       int berechneteSteuer = (int) (this.zuVersteuern() * 0.10);
+       if (berechneteSteuer < 1) return 1;
+       return berechneteSteuer;
     }
 }

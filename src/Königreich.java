@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 public class Königreich {
+
+    /**
+     * Bei änderungen von Bevölkerungsgruppen muss dieses Array abgändert werden
+     * und das Array in ausgabeSteuern.
+     */
+    public static String[] bevölkerungsgruppen = new String[]{"König", "Adel", "Bauer", "Leibeigen"};
+
     public static void main(String[] args) {
         Scanner eingabe = new Scanner(System.in);
         do{
@@ -18,24 +25,36 @@ public class Königreich {
         }while ( ! beenden().equalsIgnoreCase("j"));
     }
 
+    /**
+     * Dient zur bestimmung der Bevölgerungsgruppe durch den User
+     * @return Art der Bevölkerungsgruppe
+     */
     public static int bevölgerungsgruppe(){
         Scanner eingabe = new Scanner(System.in);
-        System.out.println("Wählen Sie die Bevölkerungsgruppe");
-        System.out.println("1 - König");
-        System.out.println("2 - Adel");
-        System.out.println("3 - Bauer");
-        System.out.println("4 - Leibeigen");
+        System.out.println("Wählen Sie eine Bevölkerungsgruppe");
+        for (int i = 0; i < bevölkerungsgruppen.length; i++) {
+            System.out.println((i + 1) + " - " + bevölkerungsgruppen[i]);
+        }
         return eingabe.nextInt();
     }
 
+    /**
+     * Dient zur Abfrage des Users ob das Programm beendet werden soll
+     * @return eingabe des Users
+     */
     public static String beenden(){
         Scanner eingabe = new Scanner(System.in);
         System.out.println("Möchten Sie das Programm beenden? (j/n)");
         return eingabe.next();
     }
 
+    /**
+     * Prüft ob Eingabe des Users valide ist
+     * @param bevölgerungsgruppe
+     * @return true bei valider eingabe
+     */
     public static boolean eingabeGültig(int bevölgerungsgruppe){
-        int anzahlBevölkerungsGruppen = 4;
+        int anzahlBevölkerungsGruppen = bevölkerungsgruppen.length;
         if (bevölgerungsgruppe < 0 || bevölgerungsgruppe > anzahlBevölkerungsGruppen){
             System.out.println("""
                             Abfrage nicht möglich.
@@ -46,24 +65,23 @@ public class Königreich {
         return true;
     }
 
+    /**
+     * Gibt die gewünschten Steuern aus
+     * Welche der User abfrägt.
+     * @param bevölgerungsgruppe
+     * @param name
+     * @param einkommen
+     */
     public static void ausgabeSteuern(int bevölgerungsgruppe, String name, int einkommen){
-        Einwohner könig, adel, bauer, leibeigen;
-        switch (bevölgerungsgruppe) {
-            case 1 -> {
-                könig = new König(name, einkommen);
-                System.out.println(könig.steuer());
-            }
-            case 2 -> {
-                adel = new Adel(name, einkommen);
-                System.out.println(adel.steuer());
-            }
-            case 3 -> {
-                bauer = new Bauer(name, einkommen);
-                System.out.println(bauer.steuer());
-            }
-            case 4 -> {
-                leibeigen = new Leibeigen(name, einkommen);
-                System.out.println(leibeigen.steuer());
+        Einwohner[] gruppen = new Einwohner[]{
+                new König(name, einkommen),
+                new Adel(name, einkommen),
+                new Bauer(name ,einkommen),
+                new Leibeigen(name, einkommen)
+        };
+        for (int i = 0; i < bevölkerungsgruppen.length; i++) {
+            if((i + 1) == bevölgerungsgruppe){
+                System.out.println(gruppen[i].steuer());
             }
         }
     }
