@@ -11,7 +11,6 @@ public class Königreich {
     public static String[] bevölkerungsgruppen = new String[]{"König", "Adel", "Bauer", "Leibeigen"};
 
     public static void main(String[] args) {
-        Scanner eingabe = new Scanner(System.in);
         do{
             int bevölkerungsgruppe = bevölkerungsgruppe();
             if ( ! eingabeGültig(bevölkerungsgruppe)) continue;
